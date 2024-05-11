@@ -7,3 +7,7 @@
 html {
   font-family: "Raleway", sans-serif;
 }
+
+.error {
+  color: red;
+}

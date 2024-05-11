@@ -13,7 +13,10 @@ export const Ukol2 = () => {
     <>
       <label>
         Login:
-        <input type="text" />
+        <input type="text" 
+        value={login}
+        onChange={(e) => setLogin(e.target.value)}/>
+        <div>Uživatelský vstup: {login}</div>
       </label>
     </>
   );

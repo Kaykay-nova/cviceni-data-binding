@@ -18,20 +18,74 @@ Zadání 6: Pokud uživatel správně vyplnil obě pole, do stavu `error` nastav
 */
 
 export const Ukol4 = () => {
+  const [login, setLogin] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const submit = (event) => {
+    event.preventDefault();
+
+    if (!login) {
+      setError('Chybí login');
+      return;
+    }
+    if (!password) {
+      setError('Chybí heslo');
+      return;
+    }
+
+    const userData = {
+      loginData: login,
+      passwordData: password,
+    };
+    console.log(userData);
+    setError('Přihlášení proběhlo úspěšně');
+  };
+
+  const userError = (e) => {
+    if (e.target.value === '') {
+      setError('Chybí login');
+    } else {
+      setError('');
+    }
+  };
+
+  const userPassword = (e) => {
+    if (e.target.value === '') {
+      setError('Chybí heslo');
+    } else {
+      setError('');
+    }
+  };
+
   return (
     <>
-      <div className="error"></div>
-      <form>
+      <div className="error">{error}</div>
+      <form onSubmit={submit}>
         <div className="field">
           <label>
             Login:
-            <input type="text" />
+            <input 
+              type="text" 
+              value={login}
+              onChange={(e) => {
+                setLogin(e.target.value);
+                userError(e);
+              }}
+            />
           </label>
         </div>
         <div className="field">
           <label>
             Heslo:
-            <input type="password" />
+            <input 
+              type="password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                userPassword(e);
+              }}
+            />
           </label>
         </div>
         <button type="submit">Přihlásit</button>
